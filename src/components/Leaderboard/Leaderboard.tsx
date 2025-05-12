@@ -7,7 +7,7 @@ type Player = {
   score: number;
 };
 
-export default function Leaderboard({ leaders }: { leaders: Player[] }) {
+export default function Leaderboard({ leaders }: { leaders: Player }) {
   return (
     <div className={styles.board}>
       <h2>🏆 Лидеры</h2>

@@ -1,19 +1,19 @@
 'use client';
 
-import { useWallet } from '../hooks/useWallet';
+import { useWalletHook } from '../hooks/useWalletHook';
 import Game from '@/components/Game/Game';
 import Leaderboard from '@/components/Leaderboard/Leaderboard';
 import styles from './page.module.css';
 import { useEffect, useState } from 'react';
-import { getLeaderboard } from 'playra-sdk';
+import { getLeaderboard, LeaderboardEntry } from 'playra-sdk';
 
 export default function HomePage() {
-  const { walletAddress, handleConnect } = useWallet();
-  const [leaders, setLeaders] = useState([]);
+  const { walletAddress, handleConnect } = useWalletHook();
+  const [leaders, setLeaders] = useState<LeaderboardEntry[]>();
 
   const refreshLeaderboard = async () => {
     const data = await getLeaderboard();
-    setLeaders(data);
+    setLeaders(data); 
   };
 
   useEffect(() => {

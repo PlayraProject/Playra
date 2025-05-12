@@ -1,9 +1,8 @@
-import { Connection, clusterApiUrl, Keypair } from '@solana/web3.js';
-import { Metaplex, mplStorage  } from '@metaplex-foundation/js';
+import { Metaplex } from '@metaplex-foundation/js';
+import { clusterApiUrl, Connection } from '@solana/web3.js';
 
-export const connection = new Connection(clusterApiUrl('devnet'));
+export const connection = new Connection(clusterApiUrl('devnet')); // или custom RPC
 
-export const metaplex = Metaplex.make(connection)
-  .use(bundlrStorage());
-
-export const mintAuthority = Keypair.generate();
+export const makeMetaplex = (walletAdapter: any) => {
+  return Metaplex.make(connection).use(walletAdapter);
+};

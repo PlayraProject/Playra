@@ -5,7 +5,7 @@ let userPublicKey: PublicKey | null = null;
 
 const STORAGE_KEY = 'playra-leaderboard';
 
-type LeaderboardEntry = {
+export type LeaderboardEntry = {
   address: string;
   score: number;
 };
