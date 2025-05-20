@@ -6,6 +6,7 @@ import Leaderboard from '@/components/Leaderboard/Leaderboard';
 import styles from './page.module.css';
 import { useEffect, useState } from 'react';
 import { getLeaderboard, LeaderboardEntry } from 'playra-sdk';
+import Navigation from '@/components/Navigation/Navigation';
 
 export default function HomePage() {
   const { walletAddress, handleConnect } = useWalletHook();
@@ -22,6 +23,7 @@ export default function HomePage() {
 
   return (
     <main className={styles.main}>
+      <Navigation />
       {walletAddress ? (
         <>
           <div className={styles.connected}>
