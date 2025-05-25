@@ -1,36 +1,39 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🕹️ Solana Game NFT Reward System
 
-## Getting Started
+This project is a prototype of a game with NFT rewards, where NFTs are automatically minted for player achievements. Everything runs on the Solana devnet, using Metaplex, with metadata uploaded to IPFS via Pinata.
 
-First, run the development server:
+## Tech Stack
+
+-  **Next.js 15**
+-  **Solana + Metaplex JS SDK**
+-  **NFT with IPFS (Pinata)**
+-  **@solana/wallet-adapter** 
+-  **TypeScript** 
+
+---
+
+## 📁 Project Structure
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+.
+├── sdk/                      # Business logic
+│   ├── index.ts             # Utility re-exports
+│   ├── metaplex.ts          # Metaplex SDK initialization
+│   ├── pinata.ts            # Upload images and metadata to IPFS via Pinata
+│   └── reward.ts            # NFT minting logic
+│
+├── src/
+│   ├── app/                 # Pages and routes (Next.js App Router)
+│   ├── components/          # UI components
+│   │   ├── ConnectWallet/   # Wallet connect button
+│   │   ├── Game/            # Main game interface
+│   │   ├── Leaderboard/     # Leaderboard
+│   │   └── Provider/        # Contexts and wrappers
+│   └── hooks/               # Custom hooks
+│
+├── .env.local               # Secret keys (Pinata)
+├── next.config.mjs          # Next.js configuration
+├── tsconfig.json            # TypeScript configuration
+├── README.md                # Documentation (this file)
+├── package.json
+└── package-lock.json
