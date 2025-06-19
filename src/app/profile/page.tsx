@@ -5,17 +5,37 @@ import { useEffect, useState } from 'react';
 import styles from './page.module.css';
 import Navigation from '@/components/Navigation/Navigation';
 
+type ScoreEntry = {
+  address: string;
+  score: number;
+};
+
 export default function ProfilePage() {
   const { publicKey } = useWallet();
-  const [score, setScore] = useState<number | null>(null);
-  const [nftImage, setNftImage] = useState<string | null>(null);
+  const [bestScore, setBestScore] = useState<number | null>(null);
+  const [gamesPlayed, setGamesPlayed] = useState<number | null>(null);
 
   useEffect(() => {
-    const savedScore = localStorage.getItem('lastScore');
-    const savedImage = localStorage.getItem('lastNftImage');
-    if (savedScore) setScore(parseInt(savedScore));
-    if (savedImage) setNftImage(savedImage);
-  }, []);
+    if (!publicKey) return;
+
+    const stored = localStorage.getItem('playra-leaderboard');
+    if (stored) {
+      try {
+        const parsed: ScoreEntry[] = JSON.parse(stored);
+        const userScores = parsed.filter(
+          (entry) => entry.address === publicKey.toBase58()
+        );
+
+        if (userScores.length > 0) {
+          const maxScore = Math.max(...userScores.map((entry) => entry.score));
+          setBestScore(maxScore);
+          setGamesPlayed(userScores.length);
+        }
+      } catch (e) {
+        console.error('Ошибка чтения из localStorage:', e);
+      }
+    }
+  }, [publicKey]);
 
   return (
     <main className={styles.main}>
@@ -24,15 +44,27 @@ export default function ProfilePage() {
 
       {publicKey ? (
         <div className={styles.infoBlock}>
-          <p><span className={styles.label}>Кошелёк:</span> {publicKey.toBase58()}</p>
-          <p><span className={styles.label}>Лучший результат:</span> {score ?? '—'}</p>
+          <p>
+            <span className={styles.label}>Кошелёк:</span>{' '}
+            {publicKey.toBase58()}
+          </p>
+          <p>
+            <span className={styles.label}>Лучший результат:</span>{' '}
+            {bestScore !== null ? bestScore : '—'}
+          </p>
+          <p>
+            <span className={styles.label}>Сыграно игр:</span>{' '}
+            {gamesPlayed !== null ? gamesPlayed : '—'}
+          </p>
 
-          {nftImage && (
-            <div>
-              <p className={styles.label}>Последняя NFT-награда:</p>
-              <img src={nftImage} alt="NFT" className={styles.nftImage} />
-            </div>
-          )}
+          <a
+            className={styles.explorerLink}
+            href={`https://solscan.io/account/${publicKey.toBase58()}?cluster=devnet`}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            🔍 Посмотреть свои NFT на Solscan
+          </a>
         </div>
       ) : (
         <p className={styles.warning}>Пожалуйста, подключите кошелёк</p>
