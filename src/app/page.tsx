@@ -35,7 +35,7 @@ export default function HomePage() {
         </>
       ) : (
         <button className={styles.button} onClick={handleConnect}>
-          Подключить Phantom
+          Підключити Phantom
         </button>
       )}
     </main>

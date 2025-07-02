@@ -32,7 +32,7 @@ export default function ProfilePage() {
           setGamesPlayed(userScores.length);
         }
       } catch (e) {
-        console.error('Ошибка чтения из localStorage:', e);
+        console.error('Помилка', e);
       }
     }
   }, [publicKey]);
@@ -40,20 +40,20 @@ export default function ProfilePage() {
   return (
     <main className={styles.main}>
       <Navigation />
-      <h1 className={styles.title}>Профиль игрока</h1>
+      <h1 className={styles.title}>Профіль гравця</h1>
 
       {publicKey ? (
         <div className={styles.infoBlock}>
           <p>
-            <span className={styles.label}>Кошелёк:</span>{' '}
+            <span className={styles.label}>гаманець:</span>{' '}
             {publicKey.toBase58()}
           </p>
           <p>
-            <span className={styles.label}>Лучший результат:</span>{' '}
+            <span className={styles.label}>Найкращий результат:</span>{' '}
             {bestScore !== null ? bestScore : '—'}
           </p>
           <p>
-            <span className={styles.label}>Сыграно игр:</span>{' '}
+            <span className={styles.label}>Зіграно ігр:</span>{' '}
             {gamesPlayed !== null ? gamesPlayed : '—'}
           </p>
 
@@ -63,11 +63,11 @@ export default function ProfilePage() {
             target="_blank"
             rel="noopener noreferrer"
           >
-            🔍 Посмотреть свои NFT на Solscan
+            🔍 Подивитися свої NFT на Solscan
           </a>
         </div>
       ) : (
-        <p className={styles.warning}>Пожалуйста, подключите кошелёк</p>
+        <p className={styles.warning}>Будь ласка, підключіть гаманець</p>
       )}
     </main>
   );

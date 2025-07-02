@@ -4,7 +4,7 @@ import { walletAdapterIdentity } from "@metaplex-foundation/js";
 
 export async function mintRewardNFT(imageFile: File, wallet: any, score: number) {
   if (!wallet) {
-    throw new Error('Кошелёк не подключён');
+    throw new Error('Гаманець не підключён');
   }
 
   const metaplex = makeMetaplex(walletAdapterIdentity(wallet));
@@ -16,7 +16,7 @@ export async function mintRewardNFT(imageFile: File, wallet: any, score: number)
   const metadata = {
     name: 'Playra Achievement NFT',
     symbol: 'PLAY',
-    description: 'NFT за достижение!',
+    description: 'NFT за досягнення!',
     image: imageUri,
     attributes: [{ trait_type: 'Очки', value: score }],
   };

@@ -10,7 +10,7 @@ type Player = {
 export default function Leaderboard({ leaders }: { leaders: Player[] }) {
   return (
     <div className={styles.board}>
-      <h2>🏆 Лидеры</h2>
+      <h2>🏆 Лідери</h2>
       <ul>
         {leaders.map((p, i) => (
           <li key={p.address}>

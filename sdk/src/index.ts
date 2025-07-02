@@ -12,7 +12,7 @@ export type LeaderboardEntry = {
 
 export async function connectWallet(): Promise<string> {
   const provider = window?.solana;
-  if (!provider?.isPhantom) throw new Error('Phantom не найден');
+  if (!provider?.isPhantom) throw new Error('Phantom не знайден');
 
   const res = await provider.connect();
   userPublicKey = new PublicKey(res.publicKey.toString());
@@ -20,7 +20,7 @@ export async function connectWallet(): Promise<string> {
 }
 
 export async function submitScore(score: number, address: string) {
-    if (!address) throw new Error('Кошелек не подключен');
+    if (!address) throw new Error('Гаманець не підключен');
   
     const existing = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]') as LeaderboardEntry[];
   

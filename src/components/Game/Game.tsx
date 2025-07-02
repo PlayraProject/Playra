@@ -20,7 +20,7 @@ export default function Game({ onScoreSubmitted }: { onScoreSubmitted: () => voi
 
   const handleSubmit = async () => {
     if (!wallet.publicKey || !walletAddress) {
-      alert('Сначала подключите кошелек!');
+      alert('Спочатку підключіть гаманець!');
       return;
     }
 
@@ -36,20 +36,20 @@ export default function Game({ onScoreSubmitted }: { onScoreSubmitted: () => voi
         console.log(wallet);
         
          await mintRewardNFT(file, wallet, score);
-        alert('Поздравляем! Вы получили NFT-награду!');
+        alert('Вітаємо! Ви отримали NFT-нагороду!');
       } 
     } catch (e) {
-      console.error('Ошибка отправки очков:', e);
+      console.error('Помилка:', e);
     }
   };
 
   return (
     <div className={styles.game}>
-      <h2>Мини-игра: Кликер</h2>
+      <h2>Міні-гра: Клікер</h2>
       <p>Очки: {score}</p>
       <button onClick={handleClick}>+1 очко</button>
-      <button onClick={handleSubmit}>Отправить результат</button>
-      {sent && <p className={styles.success}>🎉 Отправлено!</p>}
+      <button onClick={handleSubmit}>Відправити результат</button>
+      {sent && <p className={styles.success}>🎉 Відправлено!</p>}
     </div>
   );
 }

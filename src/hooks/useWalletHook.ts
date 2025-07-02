@@ -11,7 +11,7 @@ export function useWalletHook() {
       const address = await connectWallet();
       setWalletAddress(address);
     } catch (e) {
-      console.error('Ошибка подключения:', e);
+      console.error('Помилка', e);
     }
   };
 
@@ -24,7 +24,7 @@ export function useWalletHook() {
           setWalletAddress(res.publicKey.toString());
         }
       }).catch(err => {
-        console.log('Кошелек не был ранее разрешён:', err);
+        console.log('Гаманець раніше не був дозволений:', err);
       });
 
       provider.on('disconnect', () => {

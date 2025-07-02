@@ -10,7 +10,7 @@ export async function uploadToPinata(file: File): Promise<string> {
     body: formData,
   });
 
-  if (!res.ok) throw new Error('Ошибка загрузки в Pinata');
+  if (!res.ok) throw new Error('Помилка загрузки в Pinata');
 
   const data = await res.json();
   return `https://gateway.pinata.cloud/ipfs/${data.IpfsHash}`;
@@ -26,7 +26,7 @@ export async function uploadJSONToPinata(metadata: Record<string, any>): Promise
     body: JSON.stringify(metadata),
   });
 
-  if (!res.ok) throw new Error('Ошибка загрузки metadata в Pinata');
+  if (!res.ok) throw new Error('Помилка загрузки metadata в Pinata');
 
   const data = await res.json();
   return `https://gateway.pinata.cloud/ipfs/${data.IpfsHash}`;
